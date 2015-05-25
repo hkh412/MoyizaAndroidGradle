@@ -78,12 +78,6 @@ public class BoardFragment extends SearchableFragment
 	
 	public BoardFragment() {
 		data = new ArrayList<DataHashMap>();
-		type = "";
-	}
-	
-	public BoardFragment(String menuType) {
-		data = new ArrayList<DataHashMap>();
-		type = menuType;
 	}
 
 	@Override
@@ -92,7 +86,12 @@ public class BoardFragment extends SearchableFragment
 		super.onCreateView(inflater, container, savedInstanceState);
 		mContext = getActivity();
 		aq = new AQuery(mContext);
-		
+
+		Bundle bundle = getArguments();
+		if (bundle != null) {
+			type = bundle.getString("menuType");
+		}
+
 		View rootView = inflater.inflate(R.layout.fragment_board, container, false);
 		bbsList = (PullToRefreshListView) rootView.findViewById(R.id.list_board);
 		bbsList.setOnRefreshListener(new OnRefreshListener2<ListView>() {

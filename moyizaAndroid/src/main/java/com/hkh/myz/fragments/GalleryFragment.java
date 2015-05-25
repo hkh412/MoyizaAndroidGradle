@@ -70,11 +70,6 @@ public class GalleryFragment extends SearchableFragment
 		type = "tile";
 	}
 	
-	public GalleryFragment(String menuType) {
-		data = new ArrayList<DataHashMap>();
-		type = menuType.split("[|]")[1];
-	}
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -82,7 +77,15 @@ public class GalleryFragment extends SearchableFragment
 		mContext = getActivity();
 		View rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
 		boardList = (PullToRefreshGridView) rootView.findViewById(R.id.refreshGridView);
-		
+
+		Bundle bundle = getArguments();
+		if (bundle != null) {
+			String menuType = bundle.getString("menuType");
+			type = menuType.split("[|]")[1];
+		} else {
+			type = "tile";
+		}
+
 		boardList.setOnRefreshListener(new OnRefreshListener2<GridView>() {
 			@Override
 			public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
