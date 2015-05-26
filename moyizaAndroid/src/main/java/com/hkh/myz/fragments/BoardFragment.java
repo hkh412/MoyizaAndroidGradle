@@ -87,11 +87,6 @@ public class BoardFragment extends SearchableFragment
 		mContext = getActivity();
 		aq = new AQuery(mContext);
 
-		Bundle bundle = getArguments();
-		if (bundle != null) {
-			type = bundle.getString("menuType");
-		}
-
 		View rootView = inflater.inflate(R.layout.fragment_board, container, false);
 		bbsList = (PullToRefreshListView) rootView.findViewById(R.id.list_board);
 		bbsList.setOnRefreshListener(new OnRefreshListener2<ListView>() {
@@ -134,9 +129,11 @@ public class BoardFragment extends SearchableFragment
 		}
 		
 		Bundle bundle = getArguments();
+		type = bundle.getString("menuType");
 		bbsUrl = Links.MOBILE_BBS+bundle.getString("url");
 		bbsId = Util.getValueFromUrl(bbsUrl, "bbs_id");
-		
+		// menu type check
+
 		/**
 		 * 방문한 페이지 저장
 		 */

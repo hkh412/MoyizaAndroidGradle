@@ -333,7 +333,10 @@ public class MainActivity extends PagerActivity
 	}
 	
 	private void setFragmentArguments(Fragment listFragment, String url) {
-		Bundle bundle = new Bundle();
+		Bundle bundle = listFragment.getArguments();
+		if (bundle == null) {
+			bundle = new Bundle();
+		}
 		bundle.putString("url", url);
 		listFragment.setArguments(bundle);
 		

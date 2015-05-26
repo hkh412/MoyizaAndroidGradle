@@ -138,7 +138,15 @@ public class GalleryFragment extends SearchableFragment
 		Bundle bundle = getArguments();
 		bbsUrl = Links.DESKTOP_BBS+bundle.getString("url");
 		bbsId = Util.getValueFromUrl(bbsUrl, "mid");
-		
+
+		// menu type check
+		String menuType = bundle.getString("menuType");
+		if (menuType != null) {
+			type = menuType.split("[|]")[1];
+		} else {
+			type = "tile";
+		}
+
 		boardAdapter = new GridViewAdapter(mContext, R.layout.gallery_row_grid, data);
 		boardList.setAdapter(boardAdapter);
 		
